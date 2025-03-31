@@ -1,0 +1,42 @@
+object FrameBase: TFrameBase
+  Size.Width = 360.000000000000000000
+  Size.Height = 720.000000000000000000
+  Size.PlatformDefault = False
+  object LContent: TLayout
+    Align = Client
+    Size.Width = 360.000000000000000000
+    Size.Height = 696.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object LMain: TLayout
+      Align = Client
+      Size.Width = 360.000000000000000000
+      Size.Height = 600.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+    end
+    object LHeader: TLayout
+      Align = MostTop
+      Size.Width = 360.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+    object LFooter: TLayout
+      Align = MostBottom
+      Position.Y = 648.000000000000000000
+      Size.Width = 360.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+  end
+  object LIOs: TLayout
+    Align = MostBottom
+    Position.Y = 696.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+  end
+end
