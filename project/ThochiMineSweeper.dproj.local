@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2025/03/31 20:57:31.626,=C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Unit1.pas</Transaction>
+    <Transaction>2025/03/31 20:58:10.833,E:\ThoChiSofts\ThochiMineSweeper\form\Form.Application.pas=C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Unit1.pas</Transaction>
+    <Transaction>2025/03/31 20:58:10.833,E:\ThoChiSofts\ThochiMineSweeper\form\Form.Application.fmx=C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Unit1.fmx</Transaction>
+    <Transaction>2025/03/31 20:58:25.105,E:\ThoChiSofts\ThochiMineSweeper\project\ThochiMineSweeper.dproj=C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
