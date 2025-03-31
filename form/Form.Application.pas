@@ -35,9 +35,14 @@ implementation
 
 {$R *.fmx}
 
+uses
+  Frame.Main
+  ;
+
 procedure TFormApplication.FormCreate(Sender: TObject);
 begin
   FFrameStand := TFrameStand.Create(Self);
+  FFrameStand.GetFrameInfo<TFrameMain>.Show;
 end;
 
 procedure TFormApplication.FormDestroy(Sender: TObject);

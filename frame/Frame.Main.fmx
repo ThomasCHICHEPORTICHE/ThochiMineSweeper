@@ -1,0 +1,78 @@
+inherited FrameMain: TFrameMain
+  inherited LContent: TLayout
+    inherited LMain: TLayout
+      object GLMenu: TGridLayout
+        Align = VertCenter
+        ItemHeight = 48.000000000000000000
+        ItemWidth = 340.000000000000000000
+        Orientation = Horizontal
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 204.000000000000000000
+        Size.Width = 340.000000000000000000
+        Size.Height = 192.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object BMenuNewGame: TButton
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Position.X = 4.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 332.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          Text = 'BMenuNewGame'
+          TextSettings.Trimming = None
+        end
+        object BMenuSettings: TButton
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Position.X = 4.000000000000000000
+          Position.Y = 52.000000000000000000
+          Size.Width = 332.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'BMenuSettings'
+          TextSettings.Trimming = None
+        end
+        object BMenuCredits: TButton
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Position.X = 4.000000000000000000
+          Position.Y = 100.000000000000000000
+          Size.Width = 332.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'BMenuCredits'
+          TextSettings.Trimming = None
+        end
+        object BMenuExit: TButton
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Position.X = 4.000000000000000000
+          Position.Y = 148.000000000000000000
+          Size.Width = 332.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'BMenuExit'
+          TextSettings.Trimming = None
+        end
+      end
+    end
+  end
+end
