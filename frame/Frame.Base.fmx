@@ -2,6 +2,15 @@ object FrameBase: TFrameBase
   Size.Width = 360.000000000000000000
   Size.Height = 720.000000000000000000
   Size.PlatformDefault = False
+  object RBackground: TRectangle
+    Align = Contents
+    Fill.Color = claWhitesmoke
+    Locked = True
+    HitTest = False
+    Size.Width = 360.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+  end
   object LContent: TLayout
     Align = Client
     Size.Width = 360.000000000000000000

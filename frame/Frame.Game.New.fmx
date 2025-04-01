@@ -1,2 +1,165 @@
-inherited FrameBase1: TFrameBase1
+inherited FrameGameNew: TFrameGameNew
+  Margins.Right = 10.000000000000000000
+  inherited LContent: TLayout
+    inherited LMain: TLayout
+      object GLGameNew: TGridLayout
+        Align = VertCenter
+        ItemHeight = 48.000000000000000000
+        ItemWidth = 340.000000000000000000
+        Orientation = Horizontal
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 228.000000000000000000
+        Size.Width = 340.000000000000000000
+        Size.Height = 144.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object GLGameNewGameBoardSize: TGridLayout
+          ItemHeight = 48.000000000000000000
+          ItemWidth = 113.000000000000000000
+          Orientation = Horizontal
+          Size.Width = 340.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object SBGameBoardSize9x9: TSpeedButton
+            StaysPressed = True
+            GroupName = 'GameBoardSize'
+            IsPressed = True
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 4.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'SBGameBoardSize9x9'
+            TextSettings.Trimming = None
+            OnClick = SBGameBoardSizeClick
+          end
+          object SBGameBoardSize16x16: TSpeedButton
+            Tag = 1
+            StaysPressed = True
+            GroupName = 'GameBoardSize'
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 117.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'SBGameBoardSize16x16'
+            TextSettings.Trimming = None
+            OnClick = SBGameBoardSizeClick
+          end
+          object SBGameBoardSizeCustom: TSpeedButton
+            Tag = 2
+            StaysPressed = True
+            GroupName = 'GameBoardSize'
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 230.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'SBGameBoardSizeCustom'
+            TextSettings.Trimming = None
+            OnClick = SBGameBoardSizeClick
+          end
+        end
+        object GLGameNewGameDifficulty: TGridLayout
+          ItemHeight = 48.000000000000000000
+          ItemWidth = 113.000000000000000000
+          Orientation = Horizontal
+          Position.Y = 48.000000000000000000
+          Size.Width = 340.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object SBGameDifficultyEasy: TSpeedButton
+            StaysPressed = True
+            GroupName = 'GameDifficulty'
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 4.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'SBGameDifficultyEasy'
+            TextSettings.Trimming = None
+            OnClick = SBGameDifficultyClick
+          end
+          object SBGameDifficultyNormal: TSpeedButton
+            Tag = 1
+            StaysPressed = True
+            GroupName = 'GameDifficulty'
+            IsPressed = True
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 117.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'SBGameDifficultyNormal'
+            TextSettings.Trimming = None
+            OnClick = SBGameDifficultyClick
+          end
+          object SBGameDifficultyHard: TSpeedButton
+            Tag = 2
+            StaysPressed = True
+            GroupName = 'GameDifficulty'
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 230.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'SBGameDifficultyHard'
+            TextSettings.Trimming = None
+            OnClick = SBGameDifficultyClick
+          end
+        end
+        object LGameNewOption: TLayout
+          Position.Y = 96.000000000000000000
+          Size.Width = 340.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object BGameNewStart: TButton
+            Align = Client
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Size.Width = 332.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = 'BGameNewStart'
+            TextSettings.Trimming = None
+            OnClick = BGameNewStartClick
+          end
+        end
+      end
+    end
+  end
 end

@@ -80,12 +80,17 @@ type
       const ACell: TCell
     ): TCellList;
   protected
-    property AdjacentCellList[const ACell: TCell]: TCellList read GetAdjacentCellList;
   public
     property Matrix: TArray<TArray<TCell>> read FMatrix;
     property Size: TGameBoardSize read FSize write SetSize;
     property Difficulty: TGameDifficulty read FDifficulty write SetDifficulty;
     property Cell[const ARow: Integer; const AColumn: Integer]: TCell read GetCell write SetCell;
+    property AdjacentCellList[const ACell: TCell]: TCellList read GetAdjacentCellList;
+
+    constructor Create(
+      const ASize: TGameBoardSize;
+      const ADifficulty: TGameDifficulty
+    );
 
     procedure LoadMatrix;
   end;
@@ -110,27 +115,43 @@ implementation
 
 { TGameBoard }
 
+constructor TGameBoard.Create(
+  const ASize: TGameBoardSize;
+  const ADifficulty: TGameDifficulty
+);
+begin
+  FSize       := ASize;
+  FDifficulty := ADifficulty;
+end;
+
 function TGameBoard.GetAdjacentCellList(
   const ACell: TCell
 ): TCellList;
+  procedure AddCell(
+    const ACell: TCell
+  );
+  begin
+    if Assigned(ACell) then
+      Result.Add(ACell);
+  end;
 begin
   Result := TCellList.Create(False);
   //TopLeft
-  Result.Add(Cell[ACell.Row - 1, ACell.Column - 1]);
+  AddCell(Cell[ACell.Row - 1, ACell.Column - 1]);
   //Top
-  Result.Add(Cell[ACell.Row - 1, ACell.Column]);
+  AddCell(Cell[ACell.Row - 1, ACell.Column]);
   //TopRight
-  Result.Add(Cell[ACell.Row - 1, ACell.Column + 1]);
+  AddCell(Cell[ACell.Row - 1, ACell.Column + 1]);
   //Left
-  Result.Add(Cell[ACell.Row, ACell.Column - 1]);
+  AddCell(Cell[ACell.Row, ACell.Column - 1]);
   //Right
-  Result.Add(Cell[ACell.Row, ACell.Column + 1]);
+  AddCell(Cell[ACell.Row, ACell.Column + 1]);
   //BottomLeft
-  Result.Add(Cell[ACell.Row + 1, ACell.Column - 1]);
+  AddCell(Cell[ACell.Row + 1, ACell.Column - 1]);
   //Bottom
-  Result.Add(Cell[ACell.Row + 1, ACell.Column]);
+  AddCell(Cell[ACell.Row + 1, ACell.Column]);
   //BottomRight
-  Result.Add(Cell[ACell.Row + 1, ACell.Column + 1]);
+  AddCell(Cell[ACell.Row + 1, ACell.Column + 1]);
 end;
 
 function TGameBoard.GetCell(
@@ -140,8 +161,8 @@ function TGameBoard.GetCell(
 begin
   Result := nil;
   if (
-    (ARow <= 0) and (AColumn <= 0) or
-    (ARow >= GAME_BOARD_SIZE_VALUE[FSize]) and (AColumn >= GAME_BOARD_SIZE_VALUE[FSize])
+    (ARow < 0) or (AColumn < 0) or
+    (ARow >= GAME_BOARD_SIZE_VALUE[FSize]) or (AColumn >= GAME_BOARD_SIZE_VALUE[FSize])
   ) then
     Exit;
   Result := FMatrix[ARow, AColumn];
@@ -152,6 +173,7 @@ var
   iX: Integer;
   iY: Integer;
 begin
+  SetLength(FMatrix, GAME_BOARD_SIZE_VALUE[FSize], GAME_BOARD_SIZE_VALUE[FSize]);
   for iX := 0 to GAME_BOARD_SIZE_VALUE[FSize] - 1 do
     for iY := 0 to GAME_BOARD_SIZE_VALUE[FSize] - 1 do
       FMatrix[iX, iY] := TCell.Create(iX, iY, FDifficulty);

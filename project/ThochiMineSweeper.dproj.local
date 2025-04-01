@@ -2,23 +2,23 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2025/03/31 20:57:31.000.626,=C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Unit1.pas</Transaction>
-    <Transaction>2025/03/31 20:58:10.000.833,C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Unit1.fmx=E:\ThoChiSofts\ThochiMineSweeper\form\Form.Application.fmx</Transaction>
-    <Transaction>2025/03/31 20:58:10.000.833,C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Unit1.pas=E:\ThoChiSofts\ThochiMineSweeper\form\Form.Application.pas</Transaction>
-    <Transaction>2025/03/31 20:58:25.000.105,C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Project1.dproj=E:\ThoChiSofts\ThochiMineSweeper\project\ThochiMineSweeper.dproj</Transaction>
+    <Transaction>2025/03/31 20:58:10.000.833,E:\ThoChiSofts\ThochiMineSweeper\form\Form.Application.pas=C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Unit1.pas</Transaction>
+    <Transaction>2025/03/31 20:58:10.000.833,E:\ThoChiSofts\ThochiMineSweeper\form\Form.Application.fmx=C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Unit1.fmx</Transaction>
+    <Transaction>2025/03/31 20:58:25.000.105,E:\ThoChiSofts\ThochiMineSweeper\project\ThochiMineSweeper.dproj=C:\Users\thoma\OneDrive\Documents\Embarcadero\Studio\Projets\Project1.dproj</Transaction>
     <Transaction>2025/03/31 21:11:35.000.201,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
-    <Transaction>2025/03/31 21:12:42.000.960,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.fmx=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Base.fmx</Transaction>
-    <Transaction>2025/03/31 21:12:42.000.960,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Base.pas</Transaction>
+    <Transaction>2025/03/31 21:12:42.000.960,E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Base.pas=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
+    <Transaction>2025/03/31 21:12:42.000.960,E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Base.fmx=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.fmx</Transaction>
     <Transaction>2025/03/31 21:16:11.000.046,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
     <Transaction>2025/03/31 21:18:46.000.535,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
-    <Transaction>2025/03/31 21:18:56.000.444,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.fmx=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Main.fmx</Transaction>
-    <Transaction>2025/03/31 21:18:56.000.444,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Main.pas</Transaction>
+    <Transaction>2025/03/31 21:18:56.000.444,E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Main.fmx=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.fmx</Transaction>
+    <Transaction>2025/03/31 21:18:56.000.444,E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Main.pas=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
     <Transaction>2025/03/31 21:26:52.000.289,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
-    <Transaction>2025/03/31 21:27:28.000.725,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas=E:\ThoChiSofts\ThochiMineSweeper\objects\MS.Types.pas</Transaction>
-    <Transaction>2025/04/01 23:15:16.838,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
-    <Transaction>2025/04/01 23:15:31.102,E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Game.New.fmx=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.fmx</Transaction>
-    <Transaction>2025/04/01 23:15:31.102,E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Game.New.pas=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
-    <Transaction>2025/04/01 23:15:43.504,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit2.pas</Transaction>
-    <Transaction>2025/04/01 23:15:55.100,E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Game.fmx=E:\ThoChiSofts\ThochiMineSweeper\project\Unit2.fmx</Transaction>
-    <Transaction>2025/04/01 23:15:55.100,E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Game.pas=E:\ThoChiSofts\ThochiMineSweeper\project\Unit2.pas</Transaction>
+    <Transaction>2025/03/31 21:27:28.000.725,E:\ThoChiSofts\ThochiMineSweeper\objects\MS.Types.pas=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
+    <Transaction>2025/04/01 23:15:16.000.838,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
+    <Transaction>2025/04/01 23:15:31.000.102,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Game.New.pas</Transaction>
+    <Transaction>2025/04/01 23:15:31.000.102,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.fmx=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Game.New.fmx</Transaction>
+    <Transaction>2025/04/01 23:15:43.000.504,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit2.pas</Transaction>
+    <Transaction>2025/04/01 23:15:55.000.100,E:\ThoChiSofts\ThochiMineSweeper\project\Unit2.fmx=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Game.fmx</Transaction>
+    <Transaction>2025/04/01 23:15:55.000.100,E:\ThoChiSofts\ThochiMineSweeper\project\Unit2.pas=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Game.pas</Transaction>
   </Transactions>
 </BorlandProject>

@@ -1,7 +1,7 @@
 inherited FrameMain: TFrameMain
   inherited LContent: TLayout
     inherited LMain: TLayout
-      object GLMenu: TGridLayout
+      object GLMain: TGridLayout
         Align = VertCenter
         ItemHeight = 48.000000000000000000
         ItemWidth = 340.000000000000000000
@@ -29,6 +29,7 @@ inherited FrameMain: TFrameMain
           TabOrder = 3
           Text = 'BMenuNewGame'
           TextSettings.Trimming = None
+          OnClick = BMenuNewGameClick
         end
         object BMenuSettings: TButton
           Margins.Left = 4.000000000000000000

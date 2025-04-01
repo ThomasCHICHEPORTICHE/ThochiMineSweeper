@@ -1,2 +1,34 @@
-inherited FrameBase2: TFrameBase2
+inherited FrameGame: TFrameGame
+  inherited LContent: TLayout
+    inherited LMain: TLayout
+      object GPLBoardGame: TGridPanelLayout
+        Align = VertCenter
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 130.000000000000000000
+        Size.Width = 340.000000000000000000
+        Size.Height = 340.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        ColumnCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <>
+        RowCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+      end
+    end
+  end
 end

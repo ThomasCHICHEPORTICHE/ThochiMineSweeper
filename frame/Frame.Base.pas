@@ -15,7 +15,7 @@ uses
   FMX.Dialogs,
   FMX.StdCtrls,
   FMX.Layouts,
-  FrameStand
+  FrameStand, FMX.Objects
   ;
 
 type
@@ -25,6 +25,7 @@ type
     LHeader: TLayout;
     LFooter: TLayout;
     LIOs: TLayout;
+    RBackground: TRectangle;
   private
     { Déclarations privées }
     [FrameStandAttribute]

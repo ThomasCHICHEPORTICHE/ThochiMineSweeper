@@ -317,12 +317,12 @@
         </DCCReference>
         <DCCReference Include="..\objects\MS.Types.pas"/>
         <DCCReference Include="..\frame\Frame.Game.New.pas">
-            <Form>FrameBase1</Form>
+            <Form>FrameGameNew</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\frame\Frame.Game.pas">
-            <Form>FrameBase2</Form>
+            <Form>FrameGame</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
