@@ -49,6 +49,7 @@ type
 implementation
 
 uses
+  DM.Application,
   Frame.Game
   ;
 

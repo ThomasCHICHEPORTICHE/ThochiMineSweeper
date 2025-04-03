@@ -17,24 +17,40 @@ uses
   FMX.Layouts,
   FrameStand,
   Frame.Base,
-  MS.Types, FMX.Objects
+  MS.Types, FMX.Objects, FMX.Controls.Presentation
   ;
 
 type
+  TCellButton = class(TButton)
+  private
+    FCell: TCell;
+  protected
+  public
+    property Cell: TCell read FCell;
+
+    constructor Create(
+      const AOwner: TComponent;
+      const ACell: TCell
+    );
+  end;
   TFrameGame = class(TFrameBase)
     GPLBoardGame: TGridPanelLayout;
+    IBombLeftCount: TImage;
+    LBombLeftCount: TLabel;
+    LTimer: TLabel;
+    ITimer: TImage;
+    TGame: TTimer;
+    procedure TGameTimer(Sender: TObject);
   private
     { Déclarations privées }
     FGameBoard: TGameBoard;
 
     procedure LoadUI;
     procedure CellButtonLeftClick(
-      const ACell: TCell;
-      const AButton: TButton
+      const ACellButton: TCellButton
     );
     procedure CellButtonRightClick(
-      const ACell: TCell;
-      const AButton: TButton
+      const ACellButton: TCellButton
     );
     procedure CellButtonMouseDown(
       Sender: TObject;
@@ -44,8 +60,9 @@ type
       Y: Single
     );
     procedure CellButtonRefresh(
-      const AButton: TButton
+      const ACellButton: TCellButton
     );
+    procedure RefreshUI;
   public
     { Déclarations publiques }
     procedure Load(
@@ -54,12 +71,14 @@ type
     );
   end;
 
-var
-  FrameGame: TFrameGame;
-
 implementation
 
 {$R *.fmx}
+
+uses
+  System.DateUtils,
+  System.StrUtils
+  ;
 
 { TFrameGame }
 
@@ -70,48 +89,44 @@ procedure TFrameGame.CellButtonMouseDown(
   X: Single;
   Y: Single
 );
-var
-  rCell: TCell;
-  rButton: TButton;
 begin
-  rButton := TButton(Sender);
-  rCell   := TCell(rButton.TagObject);
   case Button of
     TMouseButton.mbLeft:
-      CellButtonLeftClick(rCell, rButton);
+      CellButtonLeftClick(TCellButton(Sender));
 
     TMouseButton.mbRight:
-      CellButtonRightClick(rCell, rButton);
+      CellButtonRightClick(TCellButton(Sender));
   else
     Exit;
   end;
 end;
 
 procedure TFrameGame.CellButtonRefresh(
-  const AButton: TButton
+  const ACellButton: TCellButton
 );
 var
-  rCell: TCell;
   rCellList: TCellList;
 begin
-  rCell   := TCell(AButton.TagObject);
-
   try
-    AButton.Text := '';
+    ACellButton.Text := '';
 
-    if ((not rCell.IsRevealed) and rCell.IsFlagged) then
-      AButton.Text := 'F';
+    if ((not ACellButton.Cell.IsRevealed) and ACellButton.Cell.IsFlagged) then
+      ACellButton.Text := 'F';
 
-    if (not rCell.IsRevealed) then
+    if (not ACellButton.Cell.IsRevealed) then
       Exit;
 
-    if rCell.IsBomb then
-      AButton.Text := 'B'
+    if ACellButton.Cell.IsBomb then
+      ACellButton.Text := 'B'
     else
     begin
-      rCellList := FGameBoard.AdjacentCellList[rCell];
+      rCellList := FGameBoard.AdjacentCellList[ACellButton.Cell];
       try
-        AButton.Text := rCellList.BombCount.ToString;
+        if (rCellList.BombCount <> 0) then
+          ACellButton.Text := rCellList.BombCount.ToString
+        else
+        begin
+        end;
       finally
         FreeAndNil(rCellList);
       end;
@@ -123,28 +138,30 @@ begin
 end;
 
 procedure TFrameGame.CellButtonRightClick(
-  const ACell: TCell;
-  const AButton: TButton
+  const ACellButton: TCellButton
 );
 begin
   try
-    ACell.IsFlagged := (not ACell.IsFlagged);
+    ACellButton.Cell.IsFlagged := (not ACellButton.Cell.IsFlagged);
   finally
-    CellButtonRefresh(AButton);
+    CellButtonRefresh(ACellButton);
+    RefreshUI;
   end;
 end;
 
 procedure TFrameGame.CellButtonLeftClick(
-  const ACell: TCell;
-  const AButton: TButton
+  const ACellButton: TCellButton
 );
 begin
   try
-    ACell.IsRevealed := True;
-    if ACell.IsBomb then
+    if ACellButton.Cell.IsFlagged then
+      Exit;
+    ACellButton.Cell.IsRevealed := True;
+    if ACellButton.Cell.IsBomb then
       raise Exception.Create('Big bada boum !');
   finally
-    CellButtonRefresh(AButton);
+    CellButtonRefresh(ACellButton);
+    RefreshUI;
   end;
 end;
 
@@ -157,6 +174,7 @@ begin
   FGameBoard := TGameBoard.Create(AGameBoardSize, AGameDifficulty);
   FGameBoard.LoadMatrix;
   LoadUI;
+  FGameBoard.Start;
 end;
 
 procedure TFrameGame.LoadUI;
@@ -184,14 +202,13 @@ procedure TFrameGame.LoadUI;
     const ACell: TCell
   );
   var
-    rButton: TButton;
+    rCellButton: TCellButton;
   begin
-    rButton             := TButton.Create(GPLBoardGame);
-    rButton.Align       := TAlignLayout.Client;
-    rButton.Parent      := GPLBoardGame;
-    rButton.TagObject   := ACell;
-    rButton.OnMouseDown := CellButtonMouseDown;
-    GPLBoardGame.ControlCollection.AddControl(rButton, ACell.Column, ACell.Row);
+    rCellButton             := TCellButton.Create(GPLBoardGame, ACell);
+    rCellButton.Align       := TAlignLayout.Client;
+    rCellButton.Parent      := GPLBoardGame;
+    rCellButton.OnMouseDown := CellButtonMouseDown;
+    GPLBoardGame.ControlCollection.AddControl(rCellButton, ACell.Column, ACell.Row);
   end;
 var
   rRow: TArray<TCell>;
@@ -214,11 +231,36 @@ begin
     for rRow in FGameBoard.Matrix do
       for rCell in rRow do
         AddCell(rCell);
-
-
   finally
     GPLBoardGame.EndUpdate;
+    RefreshUI;
   end;
+end;
+
+procedure TFrameGame.RefreshUI;
+begin
+  LBombLeftCount.Text := (FGameBoard.CellList.BombCount - FGameBoard.CellList.FlaggedCount).ToString;
+end;
+
+procedure TFrameGame.TGameTimer(Sender: TObject);
+begin
+  inherited;
+  if (not Assigned(FGameBoard)) then
+    Exit;
+  if (not FGameBoard.StopWatch.IsRunning) then
+    Exit;
+  LTimer.Text := (FGameBoard.StopWatch.ElapsedMilliseconds div 1000).ToString;
+end;
+
+{ TCellButton }
+
+constructor TCellButton.Create(
+  const AOwner: TComponent;
+  const ACell: TCell
+);
+begin
+  inherited Create(AOwner);
+  FCell := ACell;
 end;
 
 end.

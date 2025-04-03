@@ -26,6 +26,7 @@ implementation
 {$R *.fmx}
 
 uses
+  DM.Application,
   Frame.Game.New
   ;
 

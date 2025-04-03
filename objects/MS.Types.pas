@@ -3,7 +3,9 @@ unit MS.Types;
 interface
 
 uses
-  System.Generics.Collections;
+  System.Generics.Collections,
+  System.Diagnostics
+  ;
 
 type
   TGameBoardSize = (
@@ -55,16 +57,22 @@ type
   TCellList = class(TObjectList<TCell>)
   private
     function GetBombCount: Integer;
+    function GetBombLeftCount: Integer;
+    function GetFlaggedCount: Integer;
   protected
   public
     property BombCount: Integer read GetBombCount;
+    property BombLeftCount: Integer read GetBombLeftCount;
+    property FlaggedCount: Integer read GetFlaggedCount;
   end;
 
   TGameBoard = class
   private
     FMatrix: TArray<TArray<TCell>>;
+    FCellList: TCellList;
     FSize: TGameBoardSize;
     FDifficulty: TGameDifficulty;
+    FStopWatch: TStopwatch;
     procedure SetSize(const Value: TGameBoardSize);
     procedure SetDifficulty(const Value: TGameDifficulty);
     function GetCell(
@@ -79,6 +87,7 @@ type
     function GetAdjacentCellList(
       const ACell: TCell
     ): TCellList;
+    function GetCellList: TCellList;
   protected
   public
     property Matrix: TArray<TArray<TCell>> read FMatrix;
@@ -86,13 +95,18 @@ type
     property Difficulty: TGameDifficulty read FDifficulty write SetDifficulty;
     property Cell[const ARow: Integer; const AColumn: Integer]: TCell read GetCell write SetCell;
     property AdjacentCellList[const ACell: TCell]: TCellList read GetAdjacentCellList;
+    property CellList: TCellList read GetCellList;
+    property StopWatch: TStopwatch read FStopWatch;
 
     constructor Create(
       const ASize: TGameBoardSize;
       const ADifficulty: TGameDifficulty
     );
+    destructor Destroy; override;
 
     procedure LoadMatrix;
+    procedure Start;
+    procedure Stop;
   end;
 
 const
@@ -113,6 +127,10 @@ const
 
 implementation
 
+uses
+  System.SysUtils
+  ;
+
 { TGameBoard }
 
 constructor TGameBoard.Create(
@@ -122,6 +140,16 @@ constructor TGameBoard.Create(
 begin
   FSize       := ASize;
   FDifficulty := ADifficulty;
+end;
+
+destructor TGameBoard.Destroy;
+begin
+  Stop;
+
+  SetLength(FMatrix, 0, 0);
+  FreeAndNil(FCellList);
+
+  inherited;
 end;
 
 function TGameBoard.GetAdjacentCellList(
@@ -168,15 +196,30 @@ begin
   Result := FMatrix[ARow, AColumn];
 end;
 
+function TGameBoard.GetCellList: TCellList;
+var
+  iRow: Integer;
+  iColumn: Integer;
+begin
+  if (not Assigned(FCellList)) then
+  begin
+    FCellList := TCellList.Create(False);
+    for iRow := 0 to GAME_BOARD_SIZE_VALUE[FSize] - 1 do
+      for iColumn := 0 to GAME_BOARD_SIZE_VALUE[FSize] - 1 do
+        FCellList.Add(FMatrix[iRow, iColumn]);
+  end;
+  Result := FCellList;
+end;
+
 procedure TGameBoard.LoadMatrix;
 var
-  iX: Integer;
-  iY: Integer;
+  iRow: Integer;
+  iColumn: Integer;
 begin
   SetLength(FMatrix, GAME_BOARD_SIZE_VALUE[FSize], GAME_BOARD_SIZE_VALUE[FSize]);
-  for iX := 0 to GAME_BOARD_SIZE_VALUE[FSize] - 1 do
-    for iY := 0 to GAME_BOARD_SIZE_VALUE[FSize] - 1 do
-      FMatrix[iX, iY] := TCell.Create(iX, iY, FDifficulty);
+  for iRow := 0 to GAME_BOARD_SIZE_VALUE[FSize] - 1 do
+    for iColumn := 0 to GAME_BOARD_SIZE_VALUE[FSize] - 1 do
+      FMatrix[iRow, iColumn] := TCell.Create(iRow, iColumn, FDifficulty);
 end;
 
 procedure TGameBoard.SetCell(
@@ -199,6 +242,18 @@ end;
 procedure TGameBoard.SetSize(const Value: TGameBoardSize);
 begin
   FSize := Value;
+end;
+
+procedure TGameBoard.Start;
+begin
+  if (not FStopWatch.IsRunning) then
+    FStopWatch := TStopwatch.StartNew;
+end;
+
+procedure TGameBoard.Stop;
+begin
+  if FStopWatch.IsRunning then
+    FStopWatch.Stop
 end;
 
 { TCell }
@@ -261,6 +316,26 @@ begin
   Result := 0;
   for rCell in Self do
     if rCell.IsBomb then
+      Inc(Result);
+end;
+
+function TCellList.GetBombLeftCount: Integer;
+var
+  rCell: TCell;
+begin
+  Result := 0;
+  for rCell in Self do
+    if (rCell.IsBomb and (not rCell.IsRevealed)) then
+      Inc(Result);
+end;
+
+function TCellList.GetFlaggedCount: Integer;
+var
+  rCell: TCell;
+begin
+  Result := 0;
+  for rCell in Self do
+    if rCell.IsFlagged then
       Inc(Result);
 end;
 

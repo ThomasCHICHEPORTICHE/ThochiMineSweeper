@@ -8,12 +8,14 @@ uses
   Frame.Main in '..\frame\Frame.Main.pas' {FrameMain: TFrame},
   MS.Types in '..\objects\MS.Types.pas',
   Frame.Game.New in '..\frame\Frame.Game.New.pas' {FrameGameNew: TFrame},
-  Frame.Game in '..\frame\Frame.Game.pas' {FrameGame: TFrame};
+  Frame.Game in '..\frame\Frame.Game.pas' {FrameGame: TFrame},
+  DM.Application in '..\datamodule\DM.Application.pas' {DataModule1: TDataModule};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TFormApplication, FormApplication);
+  Application.CreateForm(TDataModule1, DataModule1);
   Application.Run;
 end.

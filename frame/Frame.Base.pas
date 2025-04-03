@@ -15,7 +15,7 @@ uses
   FMX.Dialogs,
   FMX.StdCtrls,
   FMX.Layouts,
-  FrameStand, FMX.Objects
+  FrameStand, FMX.Objects, FMX.Controls.Presentation
   ;
 
 type
@@ -34,6 +34,7 @@ type
     property FrameStand: TFrameStand read FFrameStand;
   public
     { Déclarations publiques }
+
   end;
 
 implementation
