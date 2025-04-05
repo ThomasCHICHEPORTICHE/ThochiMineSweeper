@@ -27,13 +27,13 @@ type
     GLGameNewGameBoardSize: TGridLayout;
     GLGameNewGameDifficulty: TGridLayout;
     LGameNewOption: TLayout;
-    SBGameBoardSize9x9: TSpeedButton;
-    SBGameBoardSize16x16: TSpeedButton;
-    SBGameBoardSizeCustom: TSpeedButton;
     SBGameDifficultyEasy: TSpeedButton;
     SBGameDifficultyNormal: TSpeedButton;
     SBGameDifficultyHard: TSpeedButton;
     BGameNewStart: TButton;
+    RBGameBoardSize9x9: TRadioButton;
+    RBGameBoardSize16x16: TRadioButton;
+    RBGameBoardSizeCustom: TRadioButton;
     procedure SBGameBoardSizeClick(Sender: TObject);
     procedure SBGameDifficultyClick(Sender: TObject);
     procedure BGameNewStartClick(Sender: TObject);
@@ -49,7 +49,7 @@ type
 implementation
 
 uses
-  DM.Application,
+  Form.Application,
   Frame.Game
   ;
 

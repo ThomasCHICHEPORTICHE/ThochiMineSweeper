@@ -17,22 +17,13 @@ uses
   FMX.Layouts,
   FrameStand,
   Frame.Base,
-  MS.Types, FMX.Objects, FMX.Controls.Presentation
+  MS.Types,
+  FMX.Objects,
+  FMX.Controls.Presentation,
+  System.Generics.Collections, System.ImageList, FMX.ImgList
   ;
 
 type
-  TCellButton = class(TButton)
-  private
-    FCell: TCell;
-  protected
-  public
-    property Cell: TCell read FCell;
-
-    constructor Create(
-      const AOwner: TComponent;
-      const ACell: TCell
-    );
-  end;
   TFrameGame = class(TFrameBase)
     GPLBoardGame: TGridPanelLayout;
     IBombLeftCount: TImage;
@@ -40,6 +31,7 @@ type
     LTimer: TLabel;
     ITimer: TImage;
     TGame: TTimer;
+    ILGame: TImageList;
     procedure TGameTimer(Sender: TObject);
   private
     { Déclarations privées }
@@ -63,6 +55,12 @@ type
       const ACellButton: TCellButton
     );
     procedure RefreshUI;
+    procedure RevealAllAdjacentEmptyCells(
+      const ACell: TCell
+    );
+    procedure RevealAllBombs;
+
+    procedure GameOver;
   public
     { Déclarations publiques }
     procedure Load(
@@ -76,8 +74,10 @@ implementation
 {$R *.fmx}
 
 uses
+  Form.Application,
   System.DateUtils,
-  System.StrUtils
+  System.StrUtils,
+  FMX.DialogService
   ;
 
 { TFrameGame }
@@ -89,16 +89,31 @@ procedure TFrameGame.CellButtonMouseDown(
   X: Single;
   Y: Single
 );
+var
+  rCellButton: TCellButton;
 begin
-  case Button of
-    TMouseButton.mbLeft:
-      CellButtonLeftClick(TCellButton(Sender));
-
-    TMouseButton.mbRight:
-      CellButtonRightClick(TCellButton(Sender));
-  else
+  if (not FGameBoard.IsRunning) then
     Exit;
+
+  rCellButton := TCellButton(Sender);
+  try
+    case Button of
+      TMouseButton.mbLeft:
+        CellButtonLeftClick(rCellButton);
+
+      TMouseButton.mbRight:
+        CellButtonRightClick(rCellButton);
+    else
+      Exit;
+    end;
+  except
+    on E: EBombException do
+      GameOver;
+    on E: Exception do
+      Raise E;
   end;
+  CellButtonRefresh(rCellButton);
+  RefreshUI;
 end;
 
 procedure TFrameGame.CellButtonRefresh(
@@ -108,28 +123,27 @@ var
   rCellList: TCellList;
 begin
   try
-    ACellButton.Text := '';
+    ACellButton.ImageIndex := -1;
 
     if ((not ACellButton.Cell.IsRevealed) and ACellButton.Cell.IsFlagged) then
-      ACellButton.Text := 'F';
+      ACellButton.ImageIndex := 9;
 
     if (not ACellButton.Cell.IsRevealed) then
       Exit;
 
     if ACellButton.Cell.IsBomb then
-      ACellButton.Text := 'B'
+      ACellButton.ImageIndex := 10
     else
     begin
       rCellList := FGameBoard.AdjacentCellList[ACellButton.Cell];
       try
-        if (rCellList.BombCount <> 0) then
-          ACellButton.Text := rCellList.BombCount.ToString
-        else
-        begin
-        end;
+        ACellButton.ImageIndex := ILGame.Source.IndexOf(Format('number-%d', [rCellList.BombCount]));
+        if (rCellList.BombCount = 0) then
+          RevealAllAdjacentEmptyCells(ACellButton.Cell);
       finally
         FreeAndNil(rCellList);
       end;
+      ACellButton.IsPressed := True;
     end;
 
   finally
@@ -149,20 +163,37 @@ begin
   end;
 end;
 
+procedure TFrameGame.GameOver;
+begin
+  FGameBoard.Stop;
+  RevealAllBombs;
+  TDialogService.MessageDialog(
+    'Game over !',
+    TMsgDlgType.mtError,
+    [TMsgDlgBtn.mbOK, TMsgDlgBtn.mbRetry],
+    TMsgDlgBtn.mbOK,
+    0,
+    procedure(
+      const AModalResult: TModalResult
+    )
+    begin
+      if (AModalResult = mrRetry) then
+        Load(FGameBoard.Size, FGameBoard.Difficulty)
+      else
+        FormApplication.MainMenu;
+    end
+  );
+end;
+
 procedure TFrameGame.CellButtonLeftClick(
   const ACellButton: TCellButton
 );
 begin
-  try
-    if ACellButton.Cell.IsFlagged then
-      Exit;
-    ACellButton.Cell.IsRevealed := True;
-    if ACellButton.Cell.IsBomb then
-      raise Exception.Create('Big bada boum !');
-  finally
-    CellButtonRefresh(ACellButton);
-    RefreshUI;
-  end;
+  if ACellButton.Cell.IsFlagged then
+    Exit;
+  ACellButton.Cell.IsRevealed := True;
+  if ACellButton.Cell.IsBomb then
+    raise EBombException.Create('Big bada boum !');
 end;
 
 procedure TFrameGame.Load(
@@ -204,10 +235,10 @@ procedure TFrameGame.LoadUI;
   var
     rCellButton: TCellButton;
   begin
-    rCellButton             := TCellButton.Create(GPLBoardGame, ACell);
-    rCellButton.Align       := TAlignLayout.Client;
-    rCellButton.Parent      := GPLBoardGame;
-    rCellButton.OnMouseDown := CellButtonMouseDown;
+    rCellButton                 := ACell.CellButton;
+    rCellButton.Parent          := GPLBoardGame;
+    rCellButton.Images          := ILGame;
+    rCellButton.OnMouseDown     := CellButtonMouseDown;
     GPLBoardGame.ControlCollection.AddControl(rCellButton, ACell.Column, ACell.Row);
   end;
 var
@@ -242,6 +273,35 @@ begin
   LBombLeftCount.Text := (FGameBoard.CellList.BombCount - FGameBoard.CellList.FlaggedCount).ToString;
 end;
 
+procedure TFrameGame.RevealAllAdjacentEmptyCells(
+  const ACell: TCell
+);
+var
+  oCellList: TCellList;
+  rCell: TCell;
+begin
+  ACell.IsRevealed := True;
+  oCellList := FGameBoard.AdjacentCellList[ACell];
+  try
+    for rCell in oCellList do
+      RevealAllAdjacentEmptyCells(rCell);
+  finally
+    FreeAndNil(oCellList);
+  end;
+end;
+
+procedure TFrameGame.RevealAllBombs;
+var
+  rCell: TCell;
+begin
+  for rCell in FGameBoard.CellList do
+    if rCell.IsBomb then
+    begin
+      rCell.IsRevealed := True;
+      CellButtonRefresh(rCell.CellButton);
+    end;
+end;
+
 procedure TFrameGame.TGameTimer(Sender: TObject);
 begin
   inherited;
@@ -250,17 +310,6 @@ begin
   if (not FGameBoard.StopWatch.IsRunning) then
     Exit;
   LTimer.Text := (FGameBoard.StopWatch.ElapsedMilliseconds div 1000).ToString;
-end;
-
-{ TCellButton }
-
-constructor TCellButton.Create(
-  const AOwner: TComponent;
-  const ACell: TCell
-);
-begin
-  inherited Create(AOwner);
-  FCell := ACell;
 end;
 
 end.

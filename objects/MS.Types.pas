@@ -3,8 +3,11 @@ unit MS.Types;
 interface
 
 uses
+  System.Diagnostics,
   System.Generics.Collections,
-  System.Diagnostics
+  System.SysUtils,
+  System.Classes,
+  Fmx.StdCtrls
   ;
 
 type
@@ -27,16 +30,19 @@ type
   );
   TCellProperties = set of TCellProperty;
 
+  TCellButton = class;
   TCell = class
   private
     FRow: Integer;
     FColumn: Integer;
     FProperties: TCellProperties;
+    FCellButton: TCellButton;
     function GetIsBom: Boolean;
     function GetIsRevealed: Boolean;
     function GetIsFlagged: Boolean;
     procedure SetIsFlagged(const Value: Boolean);
     procedure SetIsRevealed(const Value: Boolean);
+    function GetCellButton: TCellButton;
   protected
   public
     property Row: Integer read FRow;
@@ -45,6 +51,7 @@ type
     property IsBomb: Boolean read GetIsBom;
     property IsRevealed: Boolean read GetIsRevealed write SetIsRevealed;
     property IsFlagged: Boolean read GetIsFlagged write SetIsFlagged;
+    property CellButton: TCellButton read GetCellButton;
 
 
     constructor Create(
@@ -64,6 +71,23 @@ type
     property BombCount: Integer read GetBombCount;
     property BombLeftCount: Integer read GetBombLeftCount;
     property FlaggedCount: Integer read GetFlaggedCount;
+
+    procedure AddCell(
+      const ACell: TCell
+    );
+  end;
+
+  TCellButton = class(TButton)
+  private
+    FCell: TCell;
+  protected
+  public
+    property Cell: TCell read FCell;
+
+    constructor Create(
+      const AOwner: TComponent;
+      const ACell: TCell
+    );
   end;
 
   TGameBoard = class
@@ -88,6 +112,10 @@ type
       const ACell: TCell
     ): TCellList;
     function GetCellList: TCellList;
+    function GetAdjacentEmptyCellList(
+      const ACell: TCell
+    ): TCellList;
+    function GetIsRunning: Boolean;
   protected
   public
     property Matrix: TArray<TArray<TCell>> read FMatrix;
@@ -97,6 +125,8 @@ type
     property AdjacentCellList[const ACell: TCell]: TCellList read GetAdjacentCellList;
     property CellList: TCellList read GetCellList;
     property StopWatch: TStopwatch read FStopWatch;
+    property AdjacentEmptyCellList[const ACell: TCell]: TCellList read GetAdjacentEmptyCellList;
+    property IsRunning: Boolean read GetIsRunning;
 
     constructor Create(
       const ASize: TGameBoardSize;
@@ -108,6 +138,8 @@ type
     procedure Start;
     procedure Stop;
   end;
+
+  EBombException = class(Exception);
 
 const
   //Columns and Rows count
@@ -128,7 +160,7 @@ const
 implementation
 
 uses
-  System.SysUtils
+  FMX.Types
   ;
 
 { TGameBoard }
@@ -155,31 +187,37 @@ end;
 function TGameBoard.GetAdjacentCellList(
   const ACell: TCell
 ): TCellList;
-  procedure AddCell(
-    const ACell: TCell
-  );
-  begin
-    if Assigned(ACell) then
-      Result.Add(ACell);
-  end;
 begin
   Result := TCellList.Create(False);
   //TopLeft
-  AddCell(Cell[ACell.Row - 1, ACell.Column - 1]);
+  Result.AddCell(Cell[ACell.Row - 1, ACell.Column - 1]);
   //Top
-  AddCell(Cell[ACell.Row - 1, ACell.Column]);
+  Result.AddCell(Cell[ACell.Row - 1, ACell.Column]);
   //TopRight
-  AddCell(Cell[ACell.Row - 1, ACell.Column + 1]);
+  Result.AddCell(Cell[ACell.Row - 1, ACell.Column + 1]);
   //Left
-  AddCell(Cell[ACell.Row, ACell.Column - 1]);
+  Result.AddCell(Cell[ACell.Row, ACell.Column - 1]);
   //Right
-  AddCell(Cell[ACell.Row, ACell.Column + 1]);
+  Result.AddCell(Cell[ACell.Row, ACell.Column + 1]);
   //BottomLeft
-  AddCell(Cell[ACell.Row + 1, ACell.Column - 1]);
+  Result.AddCell(Cell[ACell.Row + 1, ACell.Column - 1]);
   //Bottom
-  AddCell(Cell[ACell.Row + 1, ACell.Column]);
+  Result.AddCell(Cell[ACell.Row + 1, ACell.Column]);
   //BottomRight
-  AddCell(Cell[ACell.Row + 1, ACell.Column + 1]);
+  Result.AddCell(Cell[ACell.Row + 1, ACell.Column + 1]);
+end;
+
+function TGameBoard.GetAdjacentEmptyCellList(const ACell: TCell): TCellList;
+begin
+  Result := TCellList.Create(False);
+  //Top
+  Result.AddCell(Cell[ACell.Row - 1, ACell.Column]);
+  //Left
+  Result.AddCell(Cell[ACell.Row, ACell.Column - 1]);
+  //Right
+  Result.AddCell(Cell[ACell.Row, ACell.Column + 1]);
+  //Bottom
+  Result.AddCell(Cell[ACell.Row + 1, ACell.Column]);
 end;
 
 function TGameBoard.GetCell(
@@ -209,6 +247,11 @@ begin
         FCellList.Add(FMatrix[iRow, iColumn]);
   end;
   Result := FCellList;
+end;
+
+function TGameBoard.GetIsRunning: Boolean;
+begin
+  Result := FStopWatch.IsRunning;
 end;
 
 procedure TGameBoard.LoadMatrix;
@@ -272,6 +315,23 @@ begin
     FProperties := FProperties + [TCellProperty.cpBomb];
 end;
 
+function TCell.GetCellButton: TCellButton;
+begin
+  if (not Assigned(FCellButton)) then
+  begin
+    FCellButton                 := TCellButton.Create(nil, Self);
+    FCellButton.Align           := TAlignLayout.Client;
+    FCellButton.Margins.Top     := 1;
+    FCellButton.Margins.Bottom  := 1;
+    FCellButton.Margins.Left    := 1;
+    FCellButton.Margins.Right   := 1;
+    FCellButton.StaysPressed    := True;
+    FCellButton.StyleLookup     := 'ClassicButtonStyle';
+    FCellButton.ApplyStyleLookup;
+  end;
+  Result := FCellButton;
+end;
+
 function TCell.GetIsBom: Boolean;
 begin
   Result := (TCellProperty.cpBomb in FProperties);
@@ -309,6 +369,14 @@ end;
 
 { TCellList }
 
+procedure TCellList.AddCell(
+  const ACell: TCell
+);
+begin
+  if Assigned(ACell) then
+    Add(ACell);
+end;
+
 function TCellList.GetBombCount: Integer;
 var
   rCell: TCell;
@@ -337,6 +405,17 @@ begin
   for rCell in Self do
     if rCell.IsFlagged then
       Inc(Result);
+end;
+
+{ TCellButton }
+
+constructor TCellButton.Create(
+  const AOwner: TComponent;
+  const ACell: TCell
+);
+begin
+  inherited Create(AOwner);
+  FCell := ACell;
 end;
 
 end.

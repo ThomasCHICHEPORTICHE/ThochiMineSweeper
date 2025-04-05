@@ -13,11 +13,13 @@ uses
   FMX.Forms,
   FMX.Graphics,
   FMX.Dialogs,
-  FrameStand
+  FrameStand, FMX.Controls.Presentation, FMX.StdCtrls
   ;
 
 type
   TFormApplication = class(TForm)
+    LApplication: TLang;
+    SBApplication: TStyleBook;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
@@ -26,6 +28,8 @@ type
   public
     { Déclarations publiques }
     property FrameStand: TFrameStand read FFrameStand;
+
+    procedure MainMenu;
   end;
 
 var
@@ -42,12 +46,18 @@ uses
 procedure TFormApplication.FormCreate(Sender: TObject);
 begin
   FFrameStand := TFrameStand.Create(Self);
-  FFrameStand.GetFrameInfo<TFrameMain>.Show;
+  MainMenu;
 end;
 
 procedure TFormApplication.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(FFrameStand);
+end;
+
+procedure TFormApplication.MainMenu;
+begin
+  FFrameStand.CloseAll;
+  FFrameStand.GetFrameInfo<TFrameMain>.Show;
 end;
 
 end.

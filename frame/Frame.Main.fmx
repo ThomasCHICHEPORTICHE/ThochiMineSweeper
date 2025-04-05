@@ -26,6 +26,7 @@ inherited FrameMain: TFrameMain
           Size.Width = 332.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
+          StyleLookup = 'ClassicButtonStyle'
           TabOrder = 3
           Text = 'BMenuNewGame'
           TextSettings.Trimming = None
@@ -41,6 +42,7 @@ inherited FrameMain: TFrameMain
           Size.Width = 332.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
+          StyleLookup = 'ClassicButtonStyle'
           TabOrder = 2
           Text = 'BMenuSettings'
           TextSettings.Trimming = None
@@ -55,6 +57,7 @@ inherited FrameMain: TFrameMain
           Size.Width = 332.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
+          StyleLookup = 'ClassicButtonStyle'
           TabOrder = 1
           Text = 'BMenuCredits'
           TextSettings.Trimming = None
@@ -69,6 +72,7 @@ inherited FrameMain: TFrameMain
           Size.Width = 332.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
+          StyleLookup = 'ClassicButtonStyle'
           TabOrder = 0
           Text = 'BMenuExit'
           TextSettings.Trimming = None

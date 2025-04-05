@@ -25,10 +25,7 @@ inherited FrameGameNew: TFrameGameNew
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
-          object SBGameBoardSize9x9: TSpeedButton
-            StaysPressed = True
-            GroupName = 'GameBoardSize'
-            IsPressed = True
+          object RBGameBoardSize9x9: TRadioButton
             Margins.Left = 4.000000000000000000
             Margins.Top = 4.000000000000000000
             Margins.Right = 4.000000000000000000
@@ -38,14 +35,13 @@ inherited FrameGameNew: TFrameGameNew
             Size.Width = 105.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
-            Text = 'SBGameBoardSize9x9'
-            TextSettings.Trimming = None
-            OnClick = SBGameBoardSizeClick
+            StyleLookup = 'ClassicRadioButtonStyle'
+            TabOrder = 2
+            Text = 'RBGameBoardSize9x9'
+            TextSettings.HorzAlign = Center
           end
-          object SBGameBoardSize16x16: TSpeedButton
+          object RBGameBoardSize16x16: TRadioButton
             Tag = 1
-            StaysPressed = True
-            GroupName = 'GameBoardSize'
             Margins.Left = 4.000000000000000000
             Margins.Top = 4.000000000000000000
             Margins.Right = 4.000000000000000000
@@ -55,14 +51,13 @@ inherited FrameGameNew: TFrameGameNew
             Size.Width = 105.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
-            Text = 'SBGameBoardSize16x16'
-            TextSettings.Trimming = None
-            OnClick = SBGameBoardSizeClick
+            StyleLookup = 'ClassicRadioButtonStyle'
+            TabOrder = 1
+            Text = 'RBGameBoardSize16x16'
+            TextSettings.HorzAlign = Center
           end
-          object SBGameBoardSizeCustom: TSpeedButton
+          object RBGameBoardSizeCustom: TRadioButton
             Tag = 2
-            StaysPressed = True
-            GroupName = 'GameBoardSize'
             Margins.Left = 4.000000000000000000
             Margins.Top = 4.000000000000000000
             Margins.Right = 4.000000000000000000
@@ -72,9 +67,10 @@ inherited FrameGameNew: TFrameGameNew
             Size.Width = 105.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
-            Text = 'SBGameBoardSizeCustom'
-            TextSettings.Trimming = None
-            OnClick = SBGameBoardSizeClick
+            StyleLookup = 'ClassicRadioButtonStyle'
+            TabOrder = 0
+            Text = 'RBGameBoardSizeCustom'
+            TextSettings.HorzAlign = Center
           end
         end
         object GLGameNewGameDifficulty: TGridLayout
@@ -98,6 +94,7 @@ inherited FrameGameNew: TFrameGameNew
             Size.Width = 105.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
+            StyleLookup = 'classicButtonStyle'
             Text = 'SBGameDifficultyEasy'
             TextSettings.Trimming = None
             OnClick = SBGameDifficultyClick
@@ -116,6 +113,7 @@ inherited FrameGameNew: TFrameGameNew
             Size.Width = 105.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
+            StyleLookup = 'classicButtonStyle'
             Text = 'SBGameDifficultyNormal'
             TextSettings.Trimming = None
             OnClick = SBGameDifficultyClick
@@ -133,6 +131,7 @@ inherited FrameGameNew: TFrameGameNew
             Size.Width = 105.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
+            StyleLookup = 'classicButtonStyle'
             Text = 'SBGameDifficultyHard'
             TextSettings.Trimming = None
             OnClick = SBGameDifficultyClick
@@ -153,6 +152,7 @@ inherited FrameGameNew: TFrameGameNew
             Size.Width = 332.000000000000000000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
+            StyleLookup = 'classicButtonStyle'
             TabOrder = 0
             Text = 'BGameNewStart'
             TextSettings.Trimming = None
