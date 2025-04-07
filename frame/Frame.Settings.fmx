@@ -1,0 +1,143 @@
+inherited FrameSettings: TFrameSettings
+  inherited LContent: TLayout
+    inherited LMain: TLayout
+      object GLSettings: TGridLayout
+        Align = VertCenter
+        ItemHeight = 48.000000000000000000
+        ItemWidth = 340.000000000000000000
+        Orientation = Horizontal
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 228.000000000000000000
+        Size.Width = 340.000000000000000000
+        Size.Height = 144.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object GLLanguage: TGridLayout
+          ItemHeight = 48.000000000000000000
+          ItemWidth = 170.000000000000000000
+          Orientation = Horizontal
+          Size.Width = 340.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object RBLanguageEN: TRadioButton
+            GroupName = 'Language'
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 4.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 162.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'RadioButtonStyle'
+            TabOrder = 0
+            Text = 'RBLanguageEN'
+            TextSettings.HorzAlign = Center
+          end
+          object RBLanguageFR: TRadioButton
+            GroupName = 'Language'
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 174.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 162.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'RadioButtonStyle'
+            TabOrder = 1
+            Text = 'RBLanguageFR'
+            TextSettings.HorzAlign = Center
+          end
+        end
+        object GLStyle: TGridLayout
+          ItemHeight = 48.000000000000000000
+          ItemWidth = 170.000000000000000000
+          Orientation = Horizontal
+          Position.Y = 48.000000000000000000
+          Size.Width = 340.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object RBStyleClassic: TRadioButton
+            GroupName = 'Style'
+            IsChecked = True
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 4.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 162.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'RadioButtonStyle'
+            TabOrder = 0
+            Text = 'RBStyleClassic'
+            TextSettings.HorzAlign = Center
+          end
+          object RBStyleModern: TRadioButton
+            GroupName = 'Style'
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 174.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 162.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'RadioButtonStyle'
+            TabOrder = 1
+            Text = 'RBStyleModern'
+            TextSettings.HorzAlign = Center
+          end
+        end
+      end
+    end
+    inherited LFooter: TLayout
+      inherited GLOption: TGridLayout
+        ItemWidth = 180.000000000000000000
+        object BCancel: TButton
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Position.X = 4.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 172.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'buttonstyle'
+          TabOrder = 0
+          Text = 'BCancel'
+          TextSettings.Trimming = None
+          OnClick = BCancelClick
+        end
+        object BSave: TButton
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Position.X = 184.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 172.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'buttonstyle'
+          TabOrder = 1
+          Text = 'BSave'
+          TextSettings.Trimming = None
+          OnClick = BSaveClick
+        end
+      end
+    end
+  end
+end

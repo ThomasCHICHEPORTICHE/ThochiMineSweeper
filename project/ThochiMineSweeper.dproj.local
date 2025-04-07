@@ -23,6 +23,13 @@
     <Transaction>2025/04/03 21:52:44.000.837,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
     <Transaction>2025/04/03 21:53:02.000.439,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas=E:\ThoChiSofts\ThochiMineSweeper\datamodule\DM.Application.pas</Transaction>
     <Transaction>2025/04/03 21:53:02.000.439,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.dfm=E:\ThoChiSofts\ThochiMineSweeper\datamodule\DM.Application.dfm</Transaction>
-    <Transaction>2025/04/05 11:57:54.857,E:\ThoChiSofts\ThochiMineSweeper\datamodule\DM.Application.pas=</Transaction>
+    <Transaction>2025/04/05 11:57:54.000.857,E:\ThoChiSofts\ThochiMineSweeper\datamodule\DM.Application.pas=</Transaction>
+    <Transaction>2025/04/06 16:08:29.000.143,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
+    <Transaction>2025/04/06 16:08:40.000.690,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.fmx=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Settings.fmx</Transaction>
+    <Transaction>2025/04/06 16:08:40.000.690,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas=E:\ThoChiSofts\ThochiMineSweeper\frame\Frame.Settings.pas</Transaction>
+    <Transaction>2025/04/06 16:37:03.000.970,=E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas</Transaction>
+    <Transaction>2025/04/06 16:37:14.000.326,E:\ThoChiSofts\ThochiMineSweeper\project\Unit1.pas=E:\ThoChiSofts\ThochiMineSweeper\objects\MS.Settings.pas</Transaction>
+    <Transaction>2025/04/06 17:33:21.506,=E:\ThoChiSofts\ThochiMineSweeper\assets\styles\classic.style</Transaction>
+    <Transaction>2025/04/06 17:33:21.546,=E:\ThoChiSofts\ThochiMineSweeper\assets\styles\modern.style</Transaction>
   </Transactions>
 </BorlandProject>

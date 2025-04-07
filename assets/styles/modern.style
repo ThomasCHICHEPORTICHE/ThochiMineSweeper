@@ -1,0 +1,120 @@
+object TStyleContainer
+  object TLayout
+    StyleName = 'ButtonStyle'
+    Align = Center
+    Size.Width = 120.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    TabOrder = 0
+    object TRectangle
+      StyleName = 'background'
+      Align = Contents
+      Fill.Color = claLightgray
+      HitTest = False
+      Size.Width = 120.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      Stroke.Thickness = 4.000000000000000000
+      XRadius = 4.000000000000000000
+      YRadius = 4.000000000000000000
+      object TShadowEffect
+        StyleName = 'SEStyle'
+        Distance = 1.000000000000000000
+        Direction = 45.000000000000000000
+        Softness = 0.300000011920929000
+        Opacity = 0.600000023841857900
+        ShadowColor = claLightgray
+      end
+      object TColorAnimation
+        StyleName = 'CASIsPressed'
+        Duration = 0.200000002980232200
+        PropertyName = 'Fill.Color'
+        StartValue = claLightgray
+        StopValue = claGray
+        Trigger = 'IsPressed=true'
+        TriggerInverse = 'IsPressed=false'
+      end
+    end
+    object TText
+      StyleName = 'text'
+      Align = Contents
+      HitTest = False
+      Margins.Left = 4.000000000000000000
+      Margins.Top = 4.000000000000000000
+      Margins.Right = 4.000000000000000000
+      Margins.Bottom = 4.000000000000000000
+      Size.Width = 112.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object TGlyph
+      StyleName = 'glyphstyle'
+      Margins.Left = 4.000000000000000000
+      Margins.Top = 4.000000000000000000
+      Margins.Right = 4.000000000000000000
+      Margins.Bottom = 4.000000000000000000
+      Align = Contents
+      Size.Width = 112.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+  object TLayout
+    StyleName = 'RadioButtonstyle'
+    Align = Center
+    Size.Width = 120.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 17
+    object TRectangle
+      StyleName = 'background'
+      Align = Contents
+      Fill.Color = claLightgray
+      HitTest = False
+      Size.Width = 120.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      Stroke.Thickness = 4.000000000000000000
+      XRadius = 4.000000000000000000
+      YRadius = 4.000000000000000000
+      object TShadowEffect
+        StyleName = 'SEStyle'
+        Distance = 3.000000000000000000
+        Direction = 45.000000000000000000
+        Softness = 0.200000002980232200
+        Opacity = 0.400000005960464500
+        ShadowColor = claLightgray
+      end
+      object TColorAnimation
+        StyleName = 'CASIsPressed'
+        Duration = 0.200000002980232200
+        PropertyName = 'Fill.Color'
+        StartValue = claLightgray
+        StopValue = claGray
+        Trigger = 'IsPressed=true'
+        TriggerInverse = 'IsPressed=false'
+      end
+    end
+    object TButtonStyleTextObject
+      StyleName = 'text'
+      Align = Contents
+      Locked = True
+      Margins.Left = 4.000000000000000000
+      Margins.Top = 4.000000000000000000
+      Margins.Right = 4.000000000000000000
+      Margins.Bottom = 4.000000000000000000
+      Size.Width = 112.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Text'
+      ShadowVisible = False
+      HotColor = claBlack
+      FocusedColor = claBlack
+      NormalColor = claBlack
+      PressedColor = claBlack
+    end
+  end
+end

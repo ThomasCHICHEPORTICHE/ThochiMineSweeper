@@ -27,13 +27,13 @@ type
     GLGameNewGameBoardSize: TGridLayout;
     GLGameNewGameDifficulty: TGridLayout;
     LGameNewOption: TLayout;
-    SBGameDifficultyEasy: TSpeedButton;
-    SBGameDifficultyNormal: TSpeedButton;
-    SBGameDifficultyHard: TSpeedButton;
     BGameNewStart: TButton;
     RBGameBoardSize9x9: TRadioButton;
     RBGameBoardSize16x16: TRadioButton;
     RBGameBoardSizeCustom: TRadioButton;
+    RBGameDifficultyEasy: TRadioButton;
+    RBGameDifficultyNormal: TRadioButton;
+    RBGameDifficultyHard: TRadioButton;
     procedure SBGameBoardSizeClick(Sender: TObject);
     procedure SBGameDifficultyClick(Sender: TObject);
     procedure BGameNewStartClick(Sender: TObject);

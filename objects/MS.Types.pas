@@ -326,7 +326,7 @@ begin
     FCellButton.Margins.Left    := 1;
     FCellButton.Margins.Right   := 1;
     FCellButton.StaysPressed    := True;
-    FCellButton.StyleLookup     := 'ClassicButtonStyle';
+    FCellButton.StyleLookup     := 'ButtonStyle';
     FCellButton.ApplyStyleLookup;
   end;
   Result := FCellButton;

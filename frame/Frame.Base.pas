@@ -26,6 +26,8 @@ type
     LFooter: TLayout;
     LIOs: TLayout;
     RBackground: TRectangle;
+    GLOption: TGridLayout;
+    procedure FrameResized(Sender: TObject);
   private
     { Déclarations privées }
     [FrameStandAttribute]
@@ -40,5 +42,11 @@ type
 implementation
 
 {$R *.fmx}
+
+procedure TFrameBase.FrameResized(Sender: TObject);
+begin
+  GLOption.ItemHeight := GLOption.Size.Height;
+  GLOption.ItemWidth  := (GLOption.Size.Width / GLOption.ControlsCount);
+end;
 
 end.

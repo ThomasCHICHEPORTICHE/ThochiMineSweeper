@@ -46,6 +46,7 @@ inherited FrameMain: TFrameMain
           TabOrder = 2
           Text = 'BMenuSettings'
           TextSettings.Trimming = None
+          OnClick = BMenuSettingsClick
         end
         object BMenuCredits: TButton
           Margins.Left = 4.000000000000000000
@@ -76,6 +77,7 @@ inherited FrameMain: TFrameMain
           TabOrder = 0
           Text = 'BMenuExit'
           TextSettings.Trimming = None
+          OnClick = BMenuExitClick
         end
       end
     end

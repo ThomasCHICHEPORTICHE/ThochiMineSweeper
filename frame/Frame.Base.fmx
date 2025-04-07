@@ -3,6 +3,7 @@ object FrameBase: TFrameBase
   Size.Width = 360.000000000000000000
   Size.Height = 720.000000000000000000
   Size.PlatformDefault = False
+  OnResized = FrameResized
   object RBackground: TRectangle
     Align = Contents
     Fill.Color = claWhitesmoke
@@ -39,6 +40,16 @@ object FrameBase: TFrameBase
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
+      object GLOption: TGridLayout
+        Align = Client
+        ItemHeight = 48.000000000000000000
+        ItemWidth = 340.000000000000000000
+        Orientation = Horizontal
+        Size.Width = 360.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
     end
   end
   object LIOs: TLayout
